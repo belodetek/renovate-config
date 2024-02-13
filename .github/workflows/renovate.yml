@@ -15,13 +15,20 @@ jobs:
       # https://github.com/actions/checkout
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
-      # https://github.com/philips-software/app-token-action
-      - uses: philips-software/app-token-action@9f5d57062c9f2beaffafaa9a34f66f824ead63a9 # v2.0.0
+      # https://github.com/marketplace/actions/github-app-token
+      - uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2.1.0
         id: app_token
         with:
           app_id: ${{ vars.APP_ID }}
-          app_base64_private_key: ${{ secrets.GH_APP_BASE64_PRIVATE_KEY }}
-          auth_type: installation
+          installation_retrieval_mode: id
+          installation_retrieval_payload: ${{ vars.INSTALLATION_ID }}
+          private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          permissions: >-
+            {
+              "contents": "read",
+              "metadata": "read"
+              "pull_requests": "write"
+            }
 
       - run: echo "RENOVATE_DRY_RUN=full" >> $GITHUB_ENV
         if: github.event_name == 'pull_request'
