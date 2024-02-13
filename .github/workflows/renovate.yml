@@ -20,7 +20,7 @@ jobs:
         id: app_token
         with:
           app_id: ${{ vars.APP_ID }}
-          app_base64_private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          app_base64_private_key: ${{ secrets.GH_APP_BASE64_PRIVATE_KEY }}
           auth_type: installation
 
       - run: echo "RENOVATE_DRY_RUN=full" >> $GITHUB_ENV
