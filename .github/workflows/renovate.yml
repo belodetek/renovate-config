@@ -30,18 +30,16 @@ jobs:
               "pull_requests": "write"
             }
 
-      - run: echo "RENOVATE_DRY_RUN=full" >> $GITHUB_ENV
-        if: github.event_name == 'pull_request'
-
       # https://github.com/renovatebot
       - uses: renovatebot/github-action@2d90417499f45ff78a09586f7b9874b19817dba3 # v40.1.0
         with:
           # https://docs.renovatebot.com/self-hosted-configuration
           configurationFile: default.json
-          token: ${{ steps.app_token.outputs.token }}
+          #token: ${{ steps.app_token.outputs.token }}
+          token: ${{ secrets.GH_PAT }}
           renovate-version: ${{ env.RENOVATE_VERSION }}
         env:
-          RENOVATE_DRY_RUN: ${{ env.RENOVATE_DRY_RUN }}
+          RENOVATE_DRY_RUN: full
           RENOVATE_HOST_RULES: |
             [
               {
