@@ -13,6 +13,6 @@
     "enabled": true
   },
   "repositories": [
-    "belodetek/private-submodule"
+    "belodetek/minimal-reproduction"
   ]
 }
