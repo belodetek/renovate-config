@@ -27,7 +27,7 @@ jobs:
             {
               "contents": "read",
               "metadata": "read",
-              "pull_requests": "write"
+              "pull_requests": "read"
             }
 
       # https://github.com/renovatebot
@@ -35,8 +35,7 @@ jobs:
         with:
           # https://docs.renovatebot.com/self-hosted-configuration
           configurationFile: default.json
-          #token: ${{ steps.app_token.outputs.token }}
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ steps.app_token.outputs.token }}
           renovate-version: ${{ env.RENOVATE_VERSION }}
         env:
           RENOVATE_DRY_RUN: full
@@ -45,6 +44,6 @@ jobs:
               {
                 "hostType": "github",
                 "matchHost": "api.github.com",
-                "token": "${{ secrets.GH_PAT }}",
+                "token": "${{ steps.app_token.outputs.token }}"
               }
             ]
