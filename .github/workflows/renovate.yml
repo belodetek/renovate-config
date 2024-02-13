@@ -1,0 +1,46 @@
+---
+name: Renovate
+on:
+  workflow_dispatch:
+
+env:
+  LOG_LEVEL: debug
+  # renovate: datasource=docker depName=renovate packageName=ghcr.io/renovatebot/renovate
+  RENOVATE_VERSION: 37.187.1
+
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      # https://github.com/actions/checkout
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+
+      # https://github.com/philips-software/app-token-action
+      - uses: philips-software/app-token-action@9f5d57062c9f2beaffafaa9a34f66f824ead63a9 # v2.0.0
+        id: app_token
+        with:
+          app_id: ${{ vars.APP_ID }}
+          # not needed if installed on this current org/repo
+          installation_id: ${{ vars.INSTALLATION_ID }}
+          private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
+      - run: echo "RENOVATE_DRY_RUN=full" >> $GITHUB_ENV
+        if: github.event_name == 'pull_request'
+
+      # https://github.com/renovatebot
+      - uses: renovatebot/github-action@2d90417499f45ff78a09586f7b9874b19817dba3 # v40.1.0
+        with:
+          # https://docs.renovatebot.com/self-hosted-configuration
+          configurationFile: default.json
+          token: ${{ steps.app_token.outputs.token }}
+          renovate-version: ${{ env.RENOVATE_VERSION }}
+        env:
+          RENOVATE_DRY_RUN: ${{ env.RENOVATE_DRY_RUN }}
+          RENOVATE_HOST_RULES: |
+            [
+              {
+                "hostType": "github",
+                "matchHost": "api.github.com",
+                "token": "${{ steps.app_token.outputs.token }}",
+              }
+            ]

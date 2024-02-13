@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "config:base",
+    "config:best-practices",
+    "helpers:pinGitHubActionDigests",
+    "regexManagers:githubActionsVersions"
+  ],
+  "cloneSubmodules": true,
+  "onboarding": false,
+  "printConfig": true,
+  "requireConfig": "optional",
+  "git-submodules": {
+    "enabled": true
+  },
+  "repositories": [
+    "belodetek/private-submodule"
+  ]
+}
