@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  LOG_LEVEL: trace
+  LOG_LEVEL: debug
   # renovate: datasource=docker depName=renovate packageName=ghcr.io/renovatebot/renovate
   RENOVATE_VERSION: 37.227.0
 
