@@ -9,6 +9,27 @@ env:
   RENOVATE_VERSION: 37.227.0
 
 jobs:
+  test:
+      # https://github.com/marketplace/actions/github-app-token
+      - uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2.1.0
+        id: app_token
+        with:
+          app_id: ${{ vars.APP_ID }}
+          installation_retrieval_mode: id
+          installation_retrieval_payload: ${{ vars.INSTALLATION_ID }}
+          private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          permissions: >-
+            {
+              "contents": "read",
+              "metadata": "read",
+            }
+
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          repository: belodetek/minimal-reproduction
+          token: ${{ steps.app_token.outputs.token }}
+          submodules: true
+
   renovate:
     runs-on: ubuntu-latest
     steps:
