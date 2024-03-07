@@ -25,7 +25,7 @@ jobs:
           permissions: >-
             {
               "contents": "read",
-              "metadata": "read",
+              "metadata": "read"
             }
 
       # https://github.com/actions/checkout
