@@ -68,6 +68,8 @@ jobs:
           token: ${{ steps.app_token.outputs.token }}
           renovate-version: ${{ env.RENOVATE_VERSION }}
         env:
+          # https://github.com/steveukx/git-js/blob/main/docs/DEBUG-LOGGING-GUIDE.md
+          DEBUG: "simple-git,simple-git:*"
           RENOVATE_DRY_RUN: full
           RENOVATE_HOST_RULES: |
             [
