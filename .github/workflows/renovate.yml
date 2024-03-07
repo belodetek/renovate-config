@@ -73,11 +73,21 @@ jobs:
             [
               {
                 "hostType": "github",
+                "matchHost": "github.com",
+                "token": "${{ steps.app_token.outputs.token }}"
+              },
+              {
+                "hostType": "github",
                 "matchHost": "api.github.com",
                 "token": "${{ steps.app_token.outputs.token }}"
               },
               {
                 "hostType": "git-refs",
+                "matchHost": "api.github.com",
+                "token": "${{ steps.app_token.outputs.token }}"
+              },
+              {
+                "hostType": "git-tags",
                 "matchHost": "api.github.com",
                 "token": "${{ steps.app_token.outputs.token }}"
               }
