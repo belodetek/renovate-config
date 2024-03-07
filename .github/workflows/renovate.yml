@@ -68,6 +68,9 @@ jobs:
           token: ${{ steps.app_token.outputs.token }}
           renovate-version: ${{ env.RENOVATE_VERSION }}
         env:
+          RENOVATE_TOKEN: ${{ steps.app_token.outputs.token }}
+          GITHUB_TOKEN: ${{ steps.app_token.outputs.token }}
+          GH_TOKEN: ${{ steps.app_token.outputs.token }}
           RENOVATE_DRY_RUN: full
           RENOVATE_HOST_RULES: |
             [
