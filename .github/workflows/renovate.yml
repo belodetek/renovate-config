@@ -42,7 +42,7 @@ jobs:
           cat <test/private-submodule/README.md
 
   renovate:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
@@ -68,9 +68,6 @@ jobs:
           token: ${{ steps.app_token.outputs.token }}
           renovate-version: ${{ env.RENOVATE_VERSION }}
         env:
-          RENOVATE_TOKEN: ${{ steps.app_token.outputs.token }}
-          GITHUB_TOKEN: ${{ steps.app_token.outputs.token }}
-          GH_TOKEN: ${{ steps.app_token.outputs.token }}
           RENOVATE_DRY_RUN: full
           RENOVATE_HOST_RULES: |
             [
