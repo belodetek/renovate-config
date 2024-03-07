@@ -42,7 +42,7 @@ jobs:
           cat <test/private-submodule/README.md
 
   renovate:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
@@ -67,7 +67,18 @@ jobs:
           configurationFile: default.json
           token: ${{ steps.app_token.outputs.token }}
           renovate-version: ${{ env.RENOVATE_VERSION }}
+          # https://github.com/renovatebot/github-action?tab=readme-ov-file#passing-other-environment-variables
+          env-regex: "^(?:RENOVATE_\\w+|DEBUG|LOG_LEVEL|GH_TOKEN|GITHUB_TOKEN|GIT_TRACE|GIT_TRACE_SETUP|GIT_CURL_VERBOSE)$"
         env:
+          # https://github.com/steveukx/git-js/blob/main/docs/DEBUG-LOGGING-GUIDE.md
+          DEBUG: simple-git,simple-git:*
+          # https://git-scm.com/book/en/v2/Git-Internals-Environment-Variables
+          GIT_TRACE: 1
+          GIT_TRACE_SETUP: 1
+          GIT_CURL_VERBOSE: 1
+          GH_TOKEN: ${{ steps.app_token.outputs.token }}
+          GITHUB_TOKEN: ${{ steps.app_token.outputs.token }}
+          RENOVATE_TOKEN: ${{ steps.app_token.outputs.token }}
           RENOVATE_DRY_RUN: full
           RENOVATE_HOST_RULES: |
             [
