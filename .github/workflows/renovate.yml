@@ -70,6 +70,10 @@ jobs:
         env:
           # https://github.com/steveukx/git-js/blob/main/docs/DEBUG-LOGGING-GUIDE.md
           DEBUG: "simple-git,simple-git:*"
+          # https://git-scm.com/book/en/v2/Git-Internals-Environment-Variables
+          GIT_TRACE: 1
+          GIT_TRACE_SETUP: 1
+          GIT_CURL_VERBOSE: 1
           RENOVATE_DRY_RUN: full
           RENOVATE_HOST_RULES: |
             [
