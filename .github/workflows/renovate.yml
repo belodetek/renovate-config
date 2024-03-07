@@ -29,9 +29,9 @@ jobs:
       # https://github.com/actions/checkout
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
         with:
-          repository: belodetek/minimal-reproduction
-          token: ${{ steps.app_token.outputs.token }}
-          submodules: true
+          repository: "belodetek/minimal-reproduction"
+          token: "${{ steps.app_token.outputs.token }}"
+          submodules: "true"
 
   renovate:
     runs-on: ubuntu-latest
