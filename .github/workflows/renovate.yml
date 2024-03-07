@@ -36,6 +36,11 @@ jobs:
           submodules: recursive
           path: test
 
+      - run: |
+          set -x
+          
+          find test | xargs cat
+
   renovate:
     runs-on: ubuntu-latest
     steps:
